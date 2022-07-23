@@ -12,59 +12,16 @@
 </template>
 
 <script>
-import {ref, computed } from 'vue'
+
+import useEventSpace from './use/event-space'
 
 export default {
   setup() {
+    const { capacity, attending, spacesLeft, increaseCapacity } = useEventSpace();
 
-    // using ref we create an reference to a primary
-    // To access 'capactiy' value, we need to use
-    // capacity.value because capacity it's a object of a reference and it's value its equal to 3
-    const capacity = ref(3)
-    const attending = ref(['Miguel', 'Vinicius', 'Marcus'])
-    
-    // function like methods
-    function increaseCapacity() {
-      capacity.value++;
-    }
-
-    // Here's the way we use computed props on Vue 3 with Composition API method
-    // We create a function
-    const spacesLeft = computed(() => {
-      return capacity.value - attending.value.length;
-    })
-
-    return {
-      capacity, increaseCapacity, spacesLeft, attending
-    }
+    return { capacity, attending, spacesLeft, increaseCapacity };
   }
 }
-
-/*
-We have another option to 'ref'
-Its reactive
-on this option, it's similar ao to the data() of old version
-
-import {reactive} from 'vue'
-
-setup() {
-  const event = reactive({
-    capaticy: 4,
-    attending: [],
-    spacesLeft: computed(() => {})
-  })
-
-  return { event }
-}
-
-on this way whe don't need to use '.value' of a data because
-it's already reads the .value.
-Also, on template, we need to use {{ event.capacity }} as Ex.
-Because we returning the event object
-
-
-To use an object destructor we need to use a function toRefs(event)
-*/
 </script>
 
 <style scoped>
