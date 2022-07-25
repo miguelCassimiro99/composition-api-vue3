@@ -12,10 +12,30 @@
 </template>
 
 <script>
-import {ref, computed, watchEffect, watch } from 'vue'
+import {
+  ref,
+  computed,
+  watchEffect, 
+  watch, 
+  onBeforeUnmount, 
+  onUnmounted
+} from 'vue'
 
 export default {
   setup() {
+    // Learn about composables to use on API calls
+    // Lifecycle Hooks
+    // Look at doc another hooks of Vue Component Lifecycle
+    onBeforeUnmount(() => {
+      // also equals to beforeDestroy()
+      console.log('Before Unmount!')
+    })
+
+    onUnmounted(() => {
+      // also equals to destroyed()
+      console.log('Unmount')
+    })
+
 
     // using ref we create an reference to a primary
     // To access 'capactiy' value, we need to use
