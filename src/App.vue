@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {ref, computed } from 'vue'
+import {ref, computed, watchEffect, watch } from 'vue'
 
 export default {
   setup() {
@@ -33,6 +33,17 @@ export default {
     const spacesLeft = computed(() => {
       return capacity.value - attending.value.length;
     })
+
+    // watch
+    // the immediate is an option because by default
+    // watch is LazyLoading
+    watch(capacity, () => {
+      console.log('Alert, wacthing')
+    }, { immediate: true});
+
+    watchEffect(() => {
+      console.log('Alert, wacthing with watchEffect')
+    });
 
     return {
       capacity, increaseCapacity, spacesLeft, attending
